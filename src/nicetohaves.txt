@@ -1,0 +1,10 @@
+const LOCAL_STORAGE_KEY = "travelPlan.activities"
+
+useEffect(()=>{
+    const storedActivities = JSON.parse(localStorage.getItem(LOCAL_STORAGE_KEY))
+    if (storedActivities) storedActivities(storedActivities)
+  },[])
+
+  useEffect(()=>{
+    localStorage.setItem(LOCAL_STORAGE_KEY,JSON.stringify(activitiesList))
+  }, [activitiesList])
