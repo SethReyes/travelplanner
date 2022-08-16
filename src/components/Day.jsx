@@ -1,31 +1,20 @@
-import React, {useState, useRef, useEffect} from 'react';
-import Location from './Location';
-import { v4 as uuidv4 } from 'uuid';
-
+import React from 'react';
+import Location from './Location'
 
 function Day({location}){
 
-    const [activitiesList, setActivities] = useState([""])
+      //const [dayPlan, setdayPlan] = useState({id: 1, })
 
-    const activityNameRef = useRef()
-    function handleAddActivity(e){
-        const name = activityNameRef.current.value;
-        if (name==='') return 
-        setActivities((prevActivities) => {
-            return [...prevActivities, {id: uuidv4(), name: name}];
-        })
-        activityNameRef.current.value = null;
-    } 
+    //const testlocation=[1,2,3]
+      
     return (
-        location.map(eachActivity => {
+        location.map(location => {
             return (
                 <>
-                {/* <Day dayNum={ [1,2] }/> */}
-                <Location activities={activitiesList} />
-                <input ref={activityNameRef} type="text" />
-                <button onClick={handleAddActivity}>Add New Activity</button>
-            </>
-                )
+                    <Location key={location.id} location={location} />
+                    <input type="text" />
+                    <button>Add Location</button>
+                </>)
         })
     )
 }
