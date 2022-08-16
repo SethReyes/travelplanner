@@ -11,14 +11,14 @@ function App() {
   // const [dayNum, setDayNum] = useState([]);
   //const dayNumRef = useRef();
 
-  const [locationList, setLocations] = useState([])
+  const [locationList, setLocations] = useState([{id: 1, locationName: "Brazil"}])
   const locationNameRef = useRef()
 
   function handleAddLocation(e){
-      const name = locationNameRef.current.value;
-      if (name==='') return 
+      const locName = locationNameRef.current.value;
+      if (locName==='') return 
       setLocations((prevLocations) => {
-          return [...prevLocations, {id: uuidv4(), name: name}];
+          return [...prevLocations, {id: uuidv4(), locationName: locName}];
       })
       locationNameRef.current.value = null;
   }
