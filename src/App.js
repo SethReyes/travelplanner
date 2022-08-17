@@ -1,35 +1,31 @@
 import './data.json';
 import Day from './components/Day';
 import React, {useState, useRef, useEffect} from 'react';
-//import Location from './components/Location';
+import Location from './components/Location';
 import { v4 as uuidv4 } from 'uuid';
 
 
 
 function App() {
 
-  // const [dayNum, setDayNum] = useState([]);
-  //const dayNumRef = useRef();
+  const [dayList, setDays] = useState([])
+  const dayNameRef = useRef()
 
-  const [locationList, setLocations] = useState([{id: 1, locationName: "Brazil"}])
-  const locationNameRef = useRef()
-
-  function handleAddLocation(e){
-      const locName = locationNameRef.current.value;
-      if (locName==='') return 
-      setLocations((prevLocations) => {
-          return [...prevLocations, {id: uuidv4(), locationName: locName}];
+  function handleAddDay(e){
+      const dayNum = dayList.length + 1;
+      setDays((prevDays) => {
+          return [...prevDays, {dayID: uuidv4(), dayNum: dayNum}];
       })
-      locationNameRef.current.value = null;
+      dayNameRef.current.value = null;
   }
   return (
-    <>
-        {/* <Day dayNum={ [1,2] }/> */}
-        <Day locations={locationList} />
-        <input ref={locationNameRef} type="text" />
-        <button onClick={handleAddLocation}>Add New Location</button>
+  <> 
+    {dayList.map(day => { console.log(day);
+        return (<Day key={day.dayID} dayNum={day.dayNum} /> )       
+    })}
+    <button onClick={handleAddDay}>Add New Day</button>
     </>
-  );
+  )
 }
 
 export default App;

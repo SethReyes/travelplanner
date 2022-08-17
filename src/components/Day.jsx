@@ -1,23 +1,31 @@
-import React from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 import Location from './Location'
+import { v4 as uuidv4 } from 'uuid';
 
-function Day({location}){
+function Day({dayNum}){
 
-      //const [dayPlan, setdayPlan] = useState({id: 1, })
-
-    //const testlocation=[1,2,3]
-      
-    return (
-        location.map(location => {
-            return (
-                <>
-                    <Location key={location.id} location={location} />
-                    <input type="text" />
-                    <button>Add Location</button>
-                </>)
+    const [locationList, setLocations] = useState([])
+    const locationNameRef = useRef()
+  
+    function handleAddLocation(e){
+        const activeName = locationNameRef.current.value;
+        if (activeName==='') return 
+        setLocations((prevLoc) => {
+            return [...prevLoc, {locID: uuidv4(), locName: activeName}];
         })
+        locationNameRef.current.value = null;
+    }
+    return (
+    <div>
+        <div>Day {dayNum} </div>
+      {locationList.map(loc => { console.log(loc);
+          return (<Location key={loc.locID} location={loc.locName} /> )       
+      })}
+      <input ref={locationNameRef} type="text" />
+      <button onClick={handleAddLocation}>Add New Location</button>
+      </div>
     )
-}
+  }
 
 
 export default Day
