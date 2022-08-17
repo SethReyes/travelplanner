@@ -1,8 +1,8 @@
-import React, {useState, useRef, useEffect} from 'react';
+import React, {useState, useRef} from 'react';
 import Location from './Location'
 import { v4 as uuidv4 } from 'uuid';
 
-function Day({dayNum}){
+function Day({dayNum, handleRemoveDay, key}){
 
     const [locationList, setLocations] = useState([])
     const locationNameRef = useRef()
@@ -17,7 +17,10 @@ function Day({dayNum}){
     }
     return (
     <div>
-        <div>Day {dayNum} </div>
+        <div>
+            Day {dayNum}
+            <button onClick={handleRemoveDay(key)}>Remove Day</button> 
+        </div>
       {locationList.map(loc => { console.log(loc);
           return (<Location key={loc.locID} location={loc.locName} /> )       
       })}
