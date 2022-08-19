@@ -2,6 +2,7 @@ import './data.json';
 import Day from './components/Day';
 import React, {useState} from 'react';
 import { v4 as uuidv4 } from 'uuid';
+import { AddButton } from "./components/styledComps/AddButton.styled"
 
 
 
@@ -15,15 +16,13 @@ function App() {
           return [...prevDays, {dayID: uuidv4(), dayNum: dayNum}];
       })
   }
-  function handleRemoveDay(removedDayNum){
-    setDays(dayList.filter(( _ , dayID ) => dayID !== removedDayNum))}
 
-  return (
+    return (
   <> 
     {dayList.map(day => {
-        return (<Day key={day.dayID} dayNum={day.dayNum} remove={handleRemoveDay}/> )       
+        return (<Day key={day.dayID} dayID={day.dayID} dayNum={day.dayNum} dayList={dayList} setDays={setDays}/> )       
     })}
-    <button onClick={handleAddDay}>Add New Day</button>
+    <AddButton onClick={handleAddDay}>+</AddButton>
   </>
   )
 }

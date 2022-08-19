@@ -17,14 +17,14 @@ export default function Location({location}) {
       activityNameRef.current.value = null;
   }
   return (
-  <div> 
+  <> 
     <div>{location}</div>
     
     {activityList.map(activ => {
         return (<Activity key={activ.actID} activity={activ} /> )       
     })}
-    <input ref={activityNameRef} type="text" />
+    <input ref={activityNameRef} type="text" placeholder="New Activity"/>
     <button onClick={handleAddActivity}>Add New Activity</button>
-    </div>
+    </>
   )
 }
